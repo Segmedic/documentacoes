@@ -53,17 +53,17 @@ flowchart TD
     Exclude3 --> Loop
     Exclude4 --> Loop
     
-    style Start fill:#90EE90
-    style End fill:#FFB6C1
-    style Include1 fill:#87CEEB
-    style Send fill:#FFD700
-    style Exclude1 fill:#FFA07A
-    style Exclude2 fill:#FFA07A
-    style Exclude3 fill:#FFA07A
-    style Exclude4 fill:#FFA07A
-    style Decision1 fill:#DDA0DD
-    style CheckAppt fill:#DDA0DD
-    style Validate fill:#DDA0DD
+    style Start fill:#e1e4e8
+    style End fill:#e1e4e8
+    style Include1 fill:#d1d5da
+    style Send fill:#d1d5da
+    style Exclude1 fill:#e1e4e8
+    style Exclude2 fill:#e1e4e8
+    style Exclude3 fill:#e1e4e8
+    style Exclude4 fill:#e1e4e8
+    style Decision1 fill:#f6f8fa
+    style CheckAppt fill:#f6f8fa
+    style Validate fill:#f6f8fa
 ```
 
 ## 📊 Fluxo de Filtragem Detalhado
@@ -107,14 +107,14 @@ flowchart LR
     G -->|Sim| I
     G -->|Não| H
     
-    style A fill:#E6E6FA
-    style H fill:#90EE90
-    style I fill:#FFB6C1
-    style B fill:#FFE4B5
-    style D fill:#FFE4B5
-    style E fill:#FFE4B5
-    style F fill:#FFE4B5
-    style G fill:#FFE4B5
+    style A fill:#f6f8fa
+    style H fill:#d1d5da
+    style I fill:#e1e4e8
+    style B fill:#fafbfc
+    style D fill:#fafbfc
+    style E fill:#fafbfc
+    style F fill:#fafbfc
+    style G fill:#fafbfc
 ```
 
 ## 🎯 Status de Agendamento
@@ -135,10 +135,10 @@ graph LR
     S11 --> Exclude
     S16 --> Exclude
     
-    style S6 fill:#87CEEB
-    style S11 fill:#87CEEB
-    style S16 fill:#87CEEB
-    style Exclude fill:#FFA07A
+    style S6 fill:#e1e4e8
+    style S11 fill:#e1e4e8
+    style S16 fill:#e1e4e8
+    style Exclude fill:#d1d5da
 ```
 
 ## 📅 Período de Busca
@@ -177,11 +177,11 @@ graph TB
     Auto -->|Verificar Membros| ClubFlex
     Auto -->|POST Lead Event| SQS
     
-    style Auto fill:#FFD700
-    style Feegow fill:#87CEEB
-    style Medula fill:#98FB98
-    style ClubFlex fill:#DDA0DD
-    style SQS fill:#FFA07A
+    style Auto fill:#d1d5da
+    style Feegow fill:#e1e4e8
+    style Medula fill:#e1e4e8
+    style ClubFlex fill:#e1e4e8
+    style SQS fill:#e1e4e8
 ```
 
 ## 📦 Estrutura do Lead
