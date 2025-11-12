@@ -143,9 +143,13 @@ O cliente seleciona:
 
 O cliente fornece:
 
-- Endereço completo
-- Dados de dependentes (se aplicável)
-- Forma de pagamento preferida
+- **Endereço completo**:
+  - Digite apenas o CEP e o sistema preenche automaticamente rua, bairro, cidade e estado
+  - Sistema usa ViaCEP (com BrasilAPI como backup para garantir disponibilidade)
+- **Dados de dependentes** (se aplicável): nome, CPF, data de nascimento
+- **Forma de pagamento preferida**: cartão, boleto ou PIX
+
+---
 
 ### Passo 5: Processamento do Pagamento
 
@@ -231,69 +235,283 @@ As assinaturas são cobradas mensalmente de forma automática:
 
 ### Proteção de Dados
 
-- Todos os dados pessoais são criptografados
-- Conformidade com a LGPD (Lei Geral de Proteção de Dados)
-- Acesso restrito por nível de permissão
-- Logs de auditoria de todas as operações
+- ✅ Todos os dados pessoais são criptografados
+- ✅ Conformidade com a LGPD (Lei Geral de Proteção de Dados)
+- ✅ Acesso restrito por nível de permissão
+- ✅ Logs de auditoria de todas as operações
+- ✅ Proteção anti-bot (Google reCAPTCHA) em formulários
+- ✅ Monitoramento 24/7 de atividades suspeitas
 
 ### Autenticação
 
-- Sistema de login seguro com senha
-- Tokens de autenticação com validade limitada
-- Opção de autenticação de dois fatores (2FA)
-- Recuperação de senha por e-mail
+- 🔐 Sistema de login seguro com senha criptografada
+- 🎫 Tokens de autenticação com validade limitada
+- 📱 Opção de autenticação de dois fatores (MFA via SMS)
+- 📧 Recuperação de senha segura por e-mail
+- 🤖 Validação anti-bot em cadastros (previne contas falsas)
 
 ### Dados Sensíveis
 
-- Números de cartão são armazenados de forma tokenizada
-- CVV nunca é armazenado
-- Dados bancários são criptografados
-- Informações médicas (se aplicável) têm proteção adicional
+- 💳 Números de cartão são armazenados de forma tokenizada (nunca salvamos o número completo)
+- 🔒 CVV nunca é armazenado em nenhuma circunstância
+- 🏦 Dados bancários são criptografados de ponta a ponta
+- 🔐 Informações médicas (se aplicável) têm proteção adicional
+- 📊 Conformidade com PCI-DSS (padrão de segurança da indústria de cartões)
+
+### Sistema de Validação
+
+- ✅ **Google reCAPTCHA**: Verifica se você é humano em formulários importantes
+- ✅ **Validação de cartão**: Cielo valida dados do cartão em tempo real
+- ✅ **Validação de endereço**: CEP é validado automaticamente
+- ✅ **Validação de CPF/CNPJ**: Sistema verifica se documentos são válidos
 
 ---
 
 ## 🔔 Notificações e Comunicação
 
-O sistema envia notificações automáticas para:
+O sistema utiliza múltiplos canais para manter os clientes informados:
 
-- Confirmação de cadastro
-- Aprovação de assinatura
-- Lembrete de vencimento de fatura
-- Confirmação de pagamento
-- Falha no pagamento
-- Atualização de dados cadastrais
-- Novos benefícios disponíveis
+### 📧 E-mails (via Mailjet)
 
-**Canais de comunicação:**
+**Quando você recebe:**
 
-- E-mail
-- SMS (opcional)
-- Notificações no app (quando aplicável)
+- ✅ Confirmação de cadastro e contrato
+- ✅ Aprovação de assinatura
+- ✅ Confirmação de pagamento mensal
+- ✅ Lembrete de vencimento (3 dias antes)
+- ✅ Nota fiscal após pagamento
+- ✅ Alerta de falha no pagamento
+- ✅ Atualização de dados cadastrais
+- ✅ Novos benefícios disponíveis
+
+**Todos os e-mails são enviados automaticamente para o e-mail cadastrado.**
+
+---
+
+### 📱 SMS (via Zenvia)
+
+**Quando você recebe:**
+
+- 🔐 Códigos de verificação para login (se ativado)
+- ⚠️ Alertas urgentes de pagamento
+- 🔔 Notificações críticas sobre a conta
+- ✅ Confirmação de alterações importantes
+
+**SMS é usado apenas para comunicações urgentes e códigos de segurança.**
+
+---
+
+### 🔒 Autenticação em Duas Etapas (MFA)
+
+Para maior segurança, você pode ativar a autenticação em dois fatores:
+
+1. Digite seu e-mail e senha normalmente
+2. Receba um código por SMS no celular cadastrado
+3. Digite o código para confirmar o acesso
+4. Sua conta fica protegida contra acessos não autorizados
+
+**Recomendamos ativar para maior segurança!**
 
 ---
 
 ## 📱 Integração com Serviços Externos
 
-A API se integra com diversos serviços para oferecer uma experiência completa:
+A API ClubFlex se integra com **10 serviços externos** diferentes para oferecer uma experiência completa e segura. Cada serviço tem uma função específica:
 
-### Vindi (Pagamentos)
+---
 
-- Processamento de cobranças recorrentes
-- Gestão de cartões de crédito
-- Emissão de boletos
-- Geração de PIX
+### 💳 Serviços de Pagamento (4 serviços)
 
-### eRede (Gateway de Pagamento)
+#### **Vindi** - Pagamentos Recorrentes
 
-- Processamento de transações com cartão
-- Validação de cartões
-- Prevenção de fraudes
+**Para que serve:** Gerencia as cobranças mensais automáticas das assinaturas.
 
-### eNotas (Notas Fiscais)
+**O que faz:**
 
-- Emissão automática de notas fiscais
-- Envio por e-mail ao cliente
-- Conformidade fiscal
+- Armazena dados de cartões de forma segura (tokenizada)
+- Processa cobranças automáticas todo mês
+- Envia notificações de pagamentos confirmados ou recusados
+- Gerencia todo o ciclo de vida da assinatura
+
+**Benefício para o cliente:** Pagamento automático sem necessidade de lembrar todo mês.
+
+---
+
+#### **eRede** - Processamento de Cartões
+
+**Para que serve:** Processa transações com cartão de crédito e débito em tempo real.
+
+**O que faz:**
+
+- Valida dados do cartão
+- Comunica com bancos e operadoras
+- Aprova ou recusa transações instantaneamente
+- Processa a primeira cobrança da assinatura
+
+**Benefício para o cliente:** Confirmação imediata se o pagamento foi aprovado.
+
+---
+
+#### **BTG Pactual** - PIX
+
+**Para que serve:** Gera cobranças via PIX (QR Code) para pagamento instantâneo.
+
+**O que faz:**
+
+- Cria QR Codes PIX para pagamento
+- Confirma pagamentos em tempo real
+- Permite configurar PIX automático (débito recorrente)
+- Processa pagamentos 24 horas por dia, 7 dias por semana
+
+**Benefício para o cliente:** Pagamento rápido, sem taxas, disponível a qualquer hora.
+
+---
+
+#### **Cielo** - Identificação de Cartões
+
+**Para que serve:** Identifica automaticamente a bandeira e tipo do cartão.
+
+**O que faz:**
+
+- Reconhece se é Visa, Mastercard, Elo, etc.
+- Identifica se é crédito ou débito
+- Valida os primeiros dígitos do cartão
+- Melhora a experiência de cadastro
+
+**Benefício para o cliente:** Sistema preenche automaticamente informações do cartão.
+
+---
+
+### 📧 Serviços de Comunicação (2 serviços)
+
+#### **Mailjet** - Envio de E-mails
+
+**Para que serve:** Envia todos os e-mails transacionais do sistema.
+
+**O que faz:**
+
+- Envia contrato de assinatura por e-mail
+- Notifica sobre pagamentos confirmados
+- Alerta sobre falhas de pagamento
+- Envia lembretes de vencimento
+- Entrega notas fiscais por e-mail
+
+**Benefício para o cliente:** Recebe todas as informações importantes na caixa de entrada.
+
+---
+
+#### **Zenvia** - Envio de SMS
+
+**Para que serve:** Envia mensagens de texto para o celular do cliente.
+
+**O que faz:**
+
+- Envia códigos de verificação (autenticação dupla)
+- Notifica sobre pagamentos urgentes
+- Alerta sobre vencimentos próximos
+- Confirma alterações de dados importantes
+
+**Benefício para o cliente:** Recebe alertas importantes mesmo sem internet.
+
+---
+
+### 📄 Serviço de Documentação Fiscal (1 serviço)
+
+#### **eNotas** - Notas Fiscais
+
+**Para que serve:** Emite notas fiscais eletrônicas automaticamente.
+
+**O que faz:**
+
+- Gera nota fiscal após cada pagamento confirmado
+- Envia NF por e-mail automaticamente
+- Mantém conformidade com legislação fiscal
+- Armazena histórico de notas emitidas
+
+**Benefício para o cliente:** Recebe nota fiscal automaticamente, sem precisar solicitar.
+
+---
+
+### 🔍 Serviços de Dados e Validação (3 serviços)
+
+#### **ViaCEP / BrasilAPI** - Consulta de Endereço
+
+**Para que serve:** Preenche automaticamente o endereço ao digitar o CEP.
+
+**O que faz:**
+
+- Busca endereço completo pelo CEP
+- Preenche rua, bairro, cidade e estado automaticamente
+- Sistema de backup: se ViaCEP falhar, usa BrasilAPI
+- Torna o cadastro mais rápido e preciso
+
+**Benefício para o cliente:** Cadastro mais rápido, sem precisar digitar endereço completo.
+
+---
+
+#### **Google reCAPTCHA** - Proteção Anti-Bot
+
+**Para que serve:** Protege formulários contra robôs e ataques automatizados.
+
+**O que faz:**
+
+- Valida se quem está cadastrando é uma pessoa real
+- Previne criação de contas falsas
+- Protege contra tentativas de fraude
+- Bloqueia ataques automatizados
+
+**Benefício para o cliente:** Plataforma mais segura e protegida.
+
+---
+
+#### **Microsoft Teams** - Alertas Internos
+
+**Para que serve:** Notifica a equipe técnica sobre problemas no sistema.
+
+**O que faz:**
+
+- Envia alertas de erros críticos
+- Notifica sobre falhas em integrações
+- Monitora saúde do sistema
+- Permite resposta rápida a incidentes
+
+**Benefício para o cliente:** Problemas são identificados e resolvidos rapidamente.
+
+---
+
+### 📊 Resumo das Integrações
+
+| Serviço | Função | Quando é usado |
+|---------|--------|----------------|
+| **Vindi** | Pagamentos recorrentes | Cobranças mensais automáticas |
+| **eRede** | Gateway de cartão | Primeira compra e transações pontuais |
+| **BTG Pactual** | PIX | Quando cliente escolhe pagar via PIX |
+| **Cielo** | Validação de cartão | Cadastro de novo cartão |
+| **Mailjet** | E-mails | Contratos, confirmações, notificações |
+| **Zenvia** | SMS | Códigos de verificação, alertas urgentes |
+| **eNotas** | Notas fiscais | Após confirmação de pagamento |
+| **ViaCEP/BrasilAPI** | Consulta CEP | Preenchimento de endereço |
+| **Google reCAPTCHA** | Anti-bot | Cadastros e formulários |
+| **Microsoft Teams** | Alertas técnicos | Monitoramento interno |
+
+---
+
+### 🔒 Segurança nas Integrações
+
+**Todas as integrações são protegidas por:**
+
+- ✅ Conexões criptografadas (HTTPS/TLS)
+- ✅ Autenticação via tokens e chaves secretas
+- ✅ Validação de dados em todas as requisições
+- ✅ Monitoramento 24/7 de disponibilidade
+- ✅ Planos de contingência em caso de falha
+
+**Sistema de Redundância:**
+
+- Se um serviço falhar, o sistema tenta alternativas
+- Exemplo: ViaCEP indisponível → usa BrasilAPI automaticamente
+- Operações críticas têm retry automático
+- Nada bloqueia a experiência do cliente
 
 ---
 
@@ -305,19 +523,53 @@ O cliente pode solicitar o cancelamento através da área logada ou entrando em 
 
 ### O que acontece se o pagamento falhar?
 
-O sistema tenta cobrar novamente após alguns dias. Se persistir a falha, a assinatura pode ser suspensa temporariamente até a regularização do pagamento.
+O sistema tenta cobrar novamente após alguns dias. Durante esse período, você recebe notificações por e-mail e SMS. Se persistir a falha, a assinatura pode ser suspensa temporariamente até a regularização do pagamento.
 
 ### É possível mudar de plano?
 
-Sim, o cliente pode fazer upgrade ou downgrade do plano. A diferença de valor é calculada proporcionalmente.
+Sim, o cliente pode fazer upgrade ou downgrade do plano. A diferença de valor é calculada proporcionalmente e ajustada na próxima fatura.
 
 ### Como adicionar dependentes?
 
-O titular pode adicionar dependentes através da área logada, informando os dados necessários. O valor adicional é cobrado na próxima fatura.
+O titular pode adicionar dependentes através da área logada, informando os dados necessários (nome, CPF, data de nascimento). O valor adicional é cobrado na próxima fatura.
 
 ### Os dados estão seguros?
 
-Sim, utilizamos criptografia de ponta, seguimos as melhores práticas de segurança e estamos em conformidade com a LGPD.
+Sim! Utilizamos:
+
+- ✅ Criptografia de ponta a ponta
+- ✅ Proteção anti-bot (Google reCAPTCHA)
+- ✅ Autenticação de dois fatores (MFA)
+- ✅ Conformidade com LGPD e PCI-DSS
+- ✅ Dados de cartão tokenizados (nunca armazenamos números completos)
+
+### Como funciona o pagamento por PIX?
+
+Ao escolher PIX, o sistema gera um QR Code automaticamente (via BTG Pactual). Você escaneia com o app do seu banco e confirma o pagamento. A confirmação é instantânea, 24/7.
+
+### Posso configurar PIX automático?
+
+Sim! PIX automático permite débito recorrente mensal direto da sua conta. Basta autorizar uma vez e os pagamentos mensais são processados automaticamente.
+
+### Recebo nota fiscal?
+
+Sim! Após cada pagamento confirmado, o sistema emite automaticamente a nota fiscal (via eNotas) e envia por e-mail. Você não precisa solicitar.
+
+### Por que preciso verificar o reCAPTCHA?
+
+O reCAPTCHA (desafio "Não sou um robô") protege o sistema contra robôs e tentativas de fraude. É uma camada extra de segurança para todos os usuários.
+
+### O que é autenticação de dois fatores (MFA)?
+
+É uma camada extra de segurança: além da senha, você recebe um código por SMS para confirmar que é realmente você tentando acessar. Recomendamos ativar!
+
+### Por que o endereço é preenchido automaticamente?
+
+Quando você digita o CEP, o sistema consulta automaticamente o endereço completo (via ViaCEP ou BrasilAPI). Isso torna o cadastro mais rápido e preciso.
+
+### E se o sistema de CEP estiver fora do ar?
+
+Não se preocupe! Temos sistema de backup automático: se ViaCEP falhar, usamos BrasilAPI. Se ambos estiverem indisponíveis (muito raro), você pode preencher manualmente.
 
 ---
 
